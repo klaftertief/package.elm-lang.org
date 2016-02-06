@@ -34,4 +34,4 @@ getDocs context =
 
 pathTo : VersionContext -> String -> String
 pathTo {user,project,version} file =
-  "/packages" </> user </> project </> version </> file
+  "https://crossorigin.me/http://package.elm-lang.org/packages" </> user </> project </> version </> file

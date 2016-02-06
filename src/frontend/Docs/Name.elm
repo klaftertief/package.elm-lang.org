@@ -47,7 +47,7 @@ toBaseLink basePath dict ({home,name} as canonical) =
       let
         link = basePathTo basePath canonical
       in
-        a [href link] [text name]
+        a [ target "_blank", href link] [text name]
 
     _ ->
       text name

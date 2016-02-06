@@ -192,10 +192,10 @@ getPackageInfo : Effects Action
 getPackageInfo =
   let
     getAll =
-      Http.get Summary.decoder "/all-packages"
+      Http.get Summary.decoder "https://crossorigin.me/http://package.elm-lang.org/all-packages"
 
     getNew =
-      Http.get (Json.list Json.string) "/new-packages"
+      Http.get (Json.list Json.string) "https://crossorigin.me/http://package.elm-lang.org/new-packages"
   in
     Task.map2 (,) getAll getNew
       |> Task.map Load
@@ -322,7 +322,7 @@ viewPackesInfo info =
                   li
                     []
                     [ a
-                        [ href ("/packages/" ++ summary.name)
+                        [ href ("http://package.elm-lang.org/packages/" ++ summary.name)
                         , style [ ("color", "#bbb")]
                         ]
                         [ text summary.name ]

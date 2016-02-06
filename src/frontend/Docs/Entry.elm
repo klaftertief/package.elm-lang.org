@@ -147,7 +147,7 @@ stringView model =
 typeViewSearch : String -> Name.Canonical -> Name.Dictionary -> Model Type -> Html
 typeViewSearch basePath canonical nameDict model =
   let
-    path = "/packages/" ++ basePath
+    path = "http://package.elm-lang.org/packages/" ++ basePath
 
     annotation =
       case model.info of
