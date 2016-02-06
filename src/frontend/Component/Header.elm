@@ -68,7 +68,7 @@ center color kids =
 
 headerLinks model =
   h1 [ class "header" ] <|
-    a [href "/"] [logo] :: unrollRoute model.route
+    a [href "http://package.elm-lang.org/"] [logo] :: unrollRoute model.route
 
 
 -- helpers
@@ -84,7 +84,7 @@ logo =
         ]
     ]
     [ img
-        [ src "/assets/elm_logo.svg"
+        [ src "assets/elm_logo.svg"
         , style
             [ "height" => "30px"
             , "vertical-align" => "bottom"
@@ -93,7 +93,7 @@ logo =
         ]
         []
     , img
-        [ src "/assets/logo-name.png"
+        [ src "assets/logo-name.png"
         , style
             [ "height" => "30px"
             , "vertical-align" => "bottom"

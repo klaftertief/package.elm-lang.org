@@ -12279,13 +12279,13 @@ Elm.Component.Header.make = function (_elm) {
    var logo = A2($Html.div,
    _U.list([$Html$Attributes.style(_U.list([A2(_op["=>"],"display","inline-block")]))]),
    _U.list([A2($Html.img,
-           _U.list([$Html$Attributes.src("/assets/elm_logo.svg")
+           _U.list([$Html$Attributes.src("assets/elm_logo.svg")
                    ,$Html$Attributes.style(_U.list([A2(_op["=>"],"height","30px")
                                                    ,A2(_op["=>"],"vertical-align","bottom")
                                                    ,A2(_op["=>"],"padding-right","8px")]))]),
            _U.list([]))
            ,A2($Html.img,
-           _U.list([$Html$Attributes.src("/assets/logo-name.png")
+           _U.list([$Html$Attributes.src("assets/logo-name.png")
                    ,$Html$Attributes.style(_U.list([A2(_op["=>"],"height","30px")
                                                    ,A2(_op["=>"],"vertical-align","bottom")
                                                    ,A2(_op["=>"],"padding-right","24px")]))]),
@@ -12335,7 +12335,7 @@ Elm.Component.Header.make = function (_elm) {
    var headerLinks = function (model) {
       return A2($Html.h1,
       _U.list([$Html$Attributes.$class("header")]),
-      A2($List._op["::"],A2($Html.a,_U.list([$Html$Attributes.href("/")]),_U.list([logo])),unrollRoute(model.route)));
+      A2($List._op["::"],A2($Html.a,_U.list([$Html$Attributes.href("http://package.elm-lang.org/")]),_U.list([logo])),unrollRoute(model.route)));
    };
    var view = F3(function (_p14,model,contents) {
       return A2($Html.div,
