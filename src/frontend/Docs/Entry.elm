@@ -3,6 +3,7 @@ module Docs.Entry where
 import Effects as Fx exposing (Effects)
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Json.Encode as Encode
 import Regex
 import String
 
@@ -47,6 +48,21 @@ type alias Fixity =
     }
 
 
+
+encode : Model String -> Encode.Value
+encode model =
+  Encode.object
+    [ ("name", Encode.string model.name)
+    , ("comment", Encode.string model.docs)
+    , ("type", encodeInfo model.info)
+    ]
+
+
+encodeInfo : Info String -> Encode.Value
+encodeInfo info =
+  case info of
+    Value tipe fixity -> Encode.string tipe
+    _ -> Encode.string "TODO"
 
 -- UPDATE
 

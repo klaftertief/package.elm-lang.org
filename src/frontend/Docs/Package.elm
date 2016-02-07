@@ -1,6 +1,7 @@
 module Docs.Package
   ( Package
   , Module
+  , encodePackage
   , decodePackage
   , decodeModule
   )
@@ -8,7 +9,7 @@ module Docs.Package
 
 import Dict
 import Json.Decode as Json exposing ((:=))
-
+import Json.Encode as Encode
 import Docs.Name as Name
 import Docs.Entry as Entry
 
@@ -26,6 +27,37 @@ type alias Module =
     , comment : String
     , entries : Dict.Dict String (Entry.Model String)
     }
+
+
+
+-- ENCODERS
+
+encodePackage : Package -> Encode.Value
+encodePackage package =
+  Dict.values package
+    |> List.map encodeModule
+    |> Encode.list
+
+
+encodeModule : Module -> Encode.Value
+encodeModule modul =
+  Encode.object
+    [ ("name", Encode.string modul.name)
+    , ("comment", Encode.string modul.comment)
+    , ("aliases", Encode.list [])
+    , ("types", Encode.list [])
+    , ("values"
+      , Dict.values modul.entries
+        |> List.filter
+          (\entry ->
+            case entry.info of
+              Entry.Value tipe fixity -> True
+              _ -> False
+          )
+        |> List.map Entry.encode
+        |> Encode.list
+      )
+    ]
 
 
 

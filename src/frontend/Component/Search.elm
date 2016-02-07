@@ -7,6 +7,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http
 import Json.Decode as Json
+import Json.Encode as JE
 import Regex
 import Set
 import String
@@ -21,6 +22,7 @@ import Docs.Version as Version
 import Page.Context as Ctx
 import Parse.Type as Type
 import Utils.Path exposing ((</>))
+import Storage
 
 
 -- MODEL
@@ -83,7 +85,8 @@ type Action
   = Fail Http.Error
   | Load ( List Summary.Summary, List String )
   | FailDocs Summary.Summary
-  | LoadDocs Ctx.VersionContext Docs.Package
+  | RequestDocs Summary.Summary
+  | MakeDocs Ctx.VersionContext Docs.Package
   | Query String
 
 
@@ -113,7 +116,7 @@ update action model =
           List.partition (\{ name } -> Set.member name updatedSet) allSummaries
 
         contextEffects =
-          List.map getDocs summaries
+          List.map getDocsFromStorage summaries
       in
         ( Catalog summaries
         , Fx.batch contextEffects
@@ -131,7 +134,12 @@ update action model =
           , Fx.none
           )
 
-    LoadDocs ctx docs ->
+    RequestDocs summary ->
+      ( model
+      , getDocs summary
+      )
+
+    MakeDocs ctx docs ->
       let
         { user, project, version } =
           ctx
@@ -203,6 +211,26 @@ getPackageInfo =
       |> Fx.task
 
 
+getDocsFromStorage : Summary.Summary -> Effects Action
+getDocsFromStorage summary =
+  let
+    contextResult =
+      latestVersionContext summary
+
+    failTask =
+      Task.succeed (FailDocs summary)
+  in
+    case contextResult of
+      Result.Ok ({ user, project, version } as context) ->
+        Storage.getItem (user </> project </> version) Docs.decodePackage
+          |> Task.map (MakeDocs context)
+          |> (flip Task.onError) (always (Task.succeed (RequestDocs summary)))
+          |> Fx.task
+
+      Result.Err error ->
+        Fx.task failTask
+
+
 getDocs : Summary.Summary -> Effects Action
 getDocs summary =
   let
@@ -213,9 +241,16 @@ getDocs summary =
       Task.succeed (FailDocs summary)
   in
     case contextResult of
-      Result.Ok context ->
+      Result.Ok ({ user, project, version } as context) ->
         Ctx.getDocs context
-          |> Task.map (LoadDocs context)
+          |> Task.mapError (always "Could not get docs")
+          |> (flip Task.andThen)
+              -- TODO remove existing items of old versions of the same package
+              (\docs ->
+                (Storage.setItem (user </> project </> version) (Docs.encodePackage docs))
+                  |> (flip Task.andThen) (always (Task.succeed docs))
+              )
+          |> Task.map (MakeDocs context)
           |> (flip Task.onError) (always failTask)
           |> Fx.task
 
@@ -323,7 +358,7 @@ viewPackesInfo info =
                     []
                     [ a
                         [ href ("http://package.elm-lang.org/packages/" ++ summary.name)
-                        , style [ ("color", "#bbb")]
+                        , style [ ( "color", "#bbb" ) ]
                         ]
                         [ text summary.name ]
                     ]
