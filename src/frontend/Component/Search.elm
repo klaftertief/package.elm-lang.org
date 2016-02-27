@@ -7,8 +7,6 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http
 import Json.Decode as Json
-import Json.Encode as JE
-import Regex
 import Set
 import String
 import Task
@@ -20,8 +18,9 @@ import Docs.Package as Docs
 import Docs.Type as Type
 import Docs.Version as Version
 import Page.Context as Ctx
-import Parse.Type as Type
 import Utils.Path exposing ((</>))
+import Signal
+import Signal.Time
 import Storage
 
 
@@ -77,6 +76,12 @@ init =
   )
 
 
+queryMailbox : Signal.Mailbox Action
+queryMailbox =
+  Signal.mailbox (Query "")
+
+querySignal : Signal.Signal Action
+querySignal = Signal.Time.settledAfter 300 queryMailbox.signal
 
 -- UPDATE
 
@@ -293,7 +298,7 @@ viewSearchInput addr info =
   input
     [ placeholder "Search function by name or type"
     , value info.query
-    , on "input" targetValue (Signal.message addr << Query)
+    , on "input" targetValue (Signal.message queryMailbox.address << Query)
     ]
     []
 

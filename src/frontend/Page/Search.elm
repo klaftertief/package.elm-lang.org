@@ -15,15 +15,13 @@ import Route
 
 -- WIRES
 
-
 app =
   StartApp.start
     { init = init
     , view = view
     , update = update
-    , inputs = []
+    , inputs = [ Signal.map UpdateSearch Search.querySignal ]
     }
-
 
 main =
   app.html
