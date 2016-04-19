@@ -11076,6 +11076,182 @@ Elm.Html.Events.make = function (_elm) {
                                     ,keyCode: keyCode
                                     ,Options: Options};
 };
+Elm.Component = Elm.Component || {};
+Elm.Component.CatalogSidebar = Elm.Component.CatalogSidebar || {};
+Elm.Component.CatalogSidebar.make = function (_elm) {
+   "use strict";
+   _elm.Component = _elm.Component || {};
+   _elm.Component.CatalogSidebar = _elm.Component.CatalogSidebar || {};
+   if (_elm.Component.CatalogSidebar.values) return _elm.Component.CatalogSidebar.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Effects = Elm.Effects.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var _op = {};
+   var pkgBlockItem = function (_p0) {
+      var _p1 = _p0;
+      var _p2 = _p1._1;
+      return A2($Html.li,
+      _U.list([]),
+      _U.list([A2($Html.a,
+      _U.list([$Html$Attributes.href(A2($Basics._op["++"],
+      "/packages/",
+      A2($Basics._op["++"],_p1._0,A2($Basics._op["++"],"/",A2($Basics._op["++"],_p2,"/latest")))))]),
+      _U.list([$Html.text(_p2)]))]));
+   };
+   var pkgBlock = F2(function (title,pkgs) {
+      return A2($Html.li,_U.list([]),_U.list([$Html.text(title),A2($Html.ul,_U.list([]),A2($List.map,pkgBlockItem,pkgs))]));
+   });
+   _op["=>"] = F2(function (v0,v1) {    return {ctor: "_Tuple2",_0: v0,_1: v1};});
+   var generalPackages = _U.list([A2(_op["=>"],"elm-lang","core")]);
+   var renderingPackages = _U.list([A2(_op["=>"],"evancz","elm-html")
+                                   ,A2(_op["=>"],"evancz","elm-svg")
+                                   ,A2(_op["=>"],"evancz","elm-markdown")
+                                   ,A2(_op["=>"],"elm-community","elm-webgl")]);
+   var effectsPackages = _U.list([A2(_op["=>"],"evancz","elm-http"),A2(_op["=>"],"evancz","start-app"),A2(_op["=>"],"evancz","elm-effects")]);
+   var view = F2(function (addr,model) {
+      return A2($Html.div,
+      _U.list([$Html$Attributes.$class("catalog-sidebar")]),
+      _U.list([A2($Html.h2,_U.list([]),_U.list([$Html.text("Resources")]))
+              ,A2($Html.ul,
+              _U.list([]),
+              _U.list([A2($Html.li,
+                      _U.list([]),
+                      _U.list([A2($Html.a,
+                      _U.list([$Html$Attributes.href("https://github.com/elm-lang/elm-package/blob/master/README.md")]),
+                      _U.list([$Html.text("Using Packages")]))]))
+                      ,A2($Html.li,
+                      _U.list([]),
+                      _U.list([A2($Html.a,_U.list([$Html$Attributes.href("/help/design-guidelines")]),_U.list([$Html.text("API Design Guidelines")]))]))
+                      ,A2($Html.li,
+                      _U.list([]),
+                      _U.list([A2($Html.a,_U.list([$Html$Attributes.href("/help/documentation-format")]),_U.list([$Html.text("Write great docs")]))]))
+                      ,A2($Html.li,
+                      _U.list([]),
+                      _U.list([A2($Html.a,_U.list([$Html$Attributes.href("/help/docs-preview")]),_U.list([$Html.text("Preview your docs")]))]))
+                      ,A2($Html.li,_U.list([]),_U.list([A2($Html.a,_U.list([$Html$Attributes.href("/search")]),_U.list([$Html.text("API Search")]))]))
+                      ,A2($Html.li,
+                      _U.list([]),
+                      _U.list([A2($Html.a,_U.list([$Html$Attributes.href("http://elm-lang.org")]),_U.list([$Html.text("Elm Website")]))]))]))
+              ,A2($Html.h2,_U.list([]),_U.list([$Html.text("Popular Packages")]))
+              ,A2($Html.ul,
+              _U.list([]),
+              _U.list([A2(pkgBlock,"General",generalPackages),A2(pkgBlock,"Rendering",renderingPackages),A2(pkgBlock,"Effects",effectsPackages)]))]));
+   });
+   var update = F2(function (action,model) {    var _p3 = action;return {ctor: "_Tuple2",_0: model,_1: $Effects.none};});
+   var Act = {ctor: "Act"};
+   var init = {ctor: "_Tuple2",_0: {ctor: "_Tuple0"},_1: $Effects.none};
+   return _elm.Component.CatalogSidebar.values = {_op: _op
+                                                 ,init: init
+                                                 ,Act: Act
+                                                 ,update: update
+                                                 ,view: view
+                                                 ,pkgBlock: pkgBlock
+                                                 ,pkgBlockItem: pkgBlockItem
+                                                 ,generalPackages: generalPackages
+                                                 ,renderingPackages: renderingPackages
+                                                 ,effectsPackages: effectsPackages};
+};
+Elm.Docs = Elm.Docs || {};
+Elm.Docs.Version = Elm.Docs.Version || {};
+Elm.Docs.Version.make = function (_elm) {
+   "use strict";
+   _elm.Docs = _elm.Docs || {};
+   _elm.Docs.Version = _elm.Docs.Version || {};
+   if (_elm.Docs.Version.values) return _elm.Docs.Version.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Dict = Elm.Dict.make(_elm),
+   $Json$Decode = Elm.Json.Decode.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $String = Elm.String.make(_elm);
+   var _op = {};
+   var insert = F2(function (y,list) {
+      var _p0 = list;
+      if (_p0.ctor === "[]") {
+            return _U.list([y]);
+         } else {
+            var _p1 = _p0._0;
+            return _U.cmp(y,_p1) > 0 ? A2($List._op["::"],_p1,A2(insert,y,_p0._1)) : A2($List._op["::"],y,list);
+         }
+   });
+   var MinorPatch = F2(function (a,b) {    return {latest: a,others: b};});
+   var toDictHelp = F2(function (_p2,dict) {
+      var _p3 = _p2;
+      var current = {ctor: "_Tuple2",_0: _p3._1,_1: _p3._2};
+      var update = function (maybeMinorPatch) {
+         var _p4 = maybeMinorPatch;
+         if (_p4.ctor === "Nothing") {
+               return $Maybe.Just(A2(MinorPatch,current,_U.list([])));
+            } else {
+               var _p5 = _p4._0.latest;
+               return $Maybe.Just(A2(MinorPatch,A2($Basics.max,_p5,current),A2(insert,A2($Basics.min,_p5,current),_p4._0.others)));
+            }
+      };
+      return A3($Dict.update,_p3._0,update,dict);
+   });
+   var toDict = function (versions) {    return A3($List.foldl,toDictHelp,$Dict.empty,versions);};
+   var toLatest = F2(function (major,_p6) {
+      var _p7 = _p6;
+      var _p8 = _p7.latest;
+      var minor = _p8._0;
+      var patch = _p8._1;
+      return {ctor: "_Tuple3",_0: major,_1: minor,_2: patch};
+   });
+   var filterInteresting = function (versions) {    return A2($List.map,$Basics.uncurry(toLatest),$Dict.toList(toDict(versions)));};
+   var vsnToString = function (_p9) {
+      var _p10 = _p9;
+      return A2($Basics._op["++"],
+      $Basics.toString(_p10._0),
+      A2($Basics._op["++"],".",A2($Basics._op["++"],$Basics.toString(_p10._1),A2($Basics._op["++"],".",$Basics.toString(_p10._2)))));
+   };
+   var all = function (list) {
+      var _p11 = list;
+      if (_p11.ctor === "[]") {
+            return $Result.Ok(_U.list([]));
+         } else {
+            return A3($Result.map2,F2(function (x,y) {    return A2($List._op["::"],x,y);}),_p11._0,all(_p11._1));
+         }
+   };
+   var fromString = function (str) {
+      var _p12 = all(A2($List.map,$String.toInt,A2($String.split,".",str)));
+      if (_p12.ctor === "Ok" && _p12._0.ctor === "::" && _p12._0._1.ctor === "::" && _p12._0._1._1.ctor === "::" && _p12._0._1._1._1.ctor === "[]") {
+            return $Result.Ok({ctor: "_Tuple3",_0: _p12._0._0,_1: _p12._0._1._0,_2: _p12._0._1._1._0});
+         } else {
+            return $Result.Err(A2($Basics._op["++"],str," is not a valid Elm version"));
+         }
+   };
+   var fromStringList = function (versions) {    return all(A2($List.map,fromString,versions));};
+   var realMax = F2(function (rawVsn,allRawVsns) {
+      var _p13 = A3($Result.map2,F2(function (v0,v1) {    return {ctor: "_Tuple2",_0: v0,_1: v1};}),fromString(rawVsn),fromStringList(allRawVsns));
+      if (_p13.ctor === "Ok" && _p13._0.ctor === "_Tuple2") {
+            var _p14 = _p13._0._0;
+            var maxVersion = A3($List.foldl,$Basics.max,_p14,_p13._0._1);
+            return _U.eq(_p14,maxVersion) ? $Maybe.Nothing : $Maybe.Just(vsnToString(maxVersion));
+         } else {
+            return $Maybe.Nothing;
+         }
+   });
+   var decoder = A2($Json$Decode.customDecoder,$Json$Decode.string,fromString);
+   return _elm.Docs.Version.values = {_op: _op
+                                     ,decoder: decoder
+                                     ,filterInteresting: filterInteresting
+                                     ,realMax: realMax
+                                     ,toDict: toDict
+                                     ,fromStringList: fromStringList
+                                     ,vsnToString: vsnToString
+                                     ,MinorPatch: MinorPatch};
+};
 Elm.Native.Http = {};
 Elm.Native.Http.make = function(localRuntime) {
 
@@ -12261,7 +12437,7 @@ Elm.Page.Context.make = function (_elm) {
       var _p1 = _p0;
       return A2($Utils$Path._op["</>"],
       A2($Utils$Path._op["</>"],
-      A2($Utils$Path._op["</>"],A2($Utils$Path._op["</>"],"https://crossorigin.me/http://package.elm-lang.org/packages",_p1.user),_p1.project),
+      A2($Utils$Path._op["</>"],A2($Utils$Path._op["</>"],"http://klaftertief.github.io/elm-package-docs/packages",_p1.user),_p1.project),
       _p1.version),
       file);
    });
@@ -12275,182 +12451,6 @@ Elm.Page.Context.make = function (_elm) {
                                      ,getReadme: getReadme
                                      ,getDocs: getDocs
                                      ,pathTo: pathTo};
-};
-Elm.Component = Elm.Component || {};
-Elm.Component.CatalogSidebar = Elm.Component.CatalogSidebar || {};
-Elm.Component.CatalogSidebar.make = function (_elm) {
-   "use strict";
-   _elm.Component = _elm.Component || {};
-   _elm.Component.CatalogSidebar = _elm.Component.CatalogSidebar || {};
-   if (_elm.Component.CatalogSidebar.values) return _elm.Component.CatalogSidebar.values;
-   var _U = Elm.Native.Utils.make(_elm),
-   $Basics = Elm.Basics.make(_elm),
-   $Debug = Elm.Debug.make(_elm),
-   $Effects = Elm.Effects.make(_elm),
-   $Html = Elm.Html.make(_elm),
-   $Html$Attributes = Elm.Html.Attributes.make(_elm),
-   $List = Elm.List.make(_elm),
-   $Maybe = Elm.Maybe.make(_elm),
-   $Result = Elm.Result.make(_elm),
-   $Signal = Elm.Signal.make(_elm);
-   var _op = {};
-   var pkgBlockItem = function (_p0) {
-      var _p1 = _p0;
-      var _p2 = _p1._1;
-      return A2($Html.li,
-      _U.list([]),
-      _U.list([A2($Html.a,
-      _U.list([$Html$Attributes.href(A2($Basics._op["++"],
-      "/packages/",
-      A2($Basics._op["++"],_p1._0,A2($Basics._op["++"],"/",A2($Basics._op["++"],_p2,"/latest")))))]),
-      _U.list([$Html.text(_p2)]))]));
-   };
-   var pkgBlock = F2(function (title,pkgs) {
-      return A2($Html.li,_U.list([]),_U.list([$Html.text(title),A2($Html.ul,_U.list([]),A2($List.map,pkgBlockItem,pkgs))]));
-   });
-   _op["=>"] = F2(function (v0,v1) {    return {ctor: "_Tuple2",_0: v0,_1: v1};});
-   var generalPackages = _U.list([A2(_op["=>"],"elm-lang","core")]);
-   var renderingPackages = _U.list([A2(_op["=>"],"evancz","elm-html")
-                                   ,A2(_op["=>"],"evancz","elm-svg")
-                                   ,A2(_op["=>"],"evancz","elm-markdown")
-                                   ,A2(_op["=>"],"johnpmayer","elm-webgl")]);
-   var effectsPackages = _U.list([A2(_op["=>"],"evancz","elm-http"),A2(_op["=>"],"evancz","start-app"),A2(_op["=>"],"evancz","elm-effects")]);
-   var view = F2(function (addr,model) {
-      return A2($Html.div,
-      _U.list([$Html$Attributes.$class("catalog-sidebar")]),
-      _U.list([A2($Html.h2,_U.list([]),_U.list([$Html.text("Resources")]))
-              ,A2($Html.ul,
-              _U.list([]),
-              _U.list([A2($Html.li,
-                      _U.list([]),
-                      _U.list([A2($Html.a,
-                      _U.list([$Html$Attributes.href("https://github.com/elm-lang/elm-package/blob/master/README.md")]),
-                      _U.list([$Html.text("Using Packages")]))]))
-                      ,A2($Html.li,
-                      _U.list([]),
-                      _U.list([A2($Html.a,_U.list([$Html$Attributes.href("/help/design-guidelines")]),_U.list([$Html.text("API Design Guidelines")]))]))
-                      ,A2($Html.li,
-                      _U.list([]),
-                      _U.list([A2($Html.a,_U.list([$Html$Attributes.href("/help/documentation-format")]),_U.list([$Html.text("Write great docs")]))]))
-                      ,A2($Html.li,
-                      _U.list([]),
-                      _U.list([A2($Html.a,_U.list([$Html$Attributes.href("/help/docs-preview")]),_U.list([$Html.text("Preview your docs")]))]))
-                      ,A2($Html.li,_U.list([]),_U.list([A2($Html.a,_U.list([$Html$Attributes.href("/search")]),_U.list([$Html.text("API Search")]))]))
-                      ,A2($Html.li,
-                      _U.list([]),
-                      _U.list([A2($Html.a,_U.list([$Html$Attributes.href("http://elm-lang.org")]),_U.list([$Html.text("Elm Website")]))]))]))
-              ,A2($Html.h2,_U.list([]),_U.list([$Html.text("Popular Packages")]))
-              ,A2($Html.ul,
-              _U.list([]),
-              _U.list([A2(pkgBlock,"General",generalPackages),A2(pkgBlock,"Rendering",renderingPackages),A2(pkgBlock,"Effects",effectsPackages)]))]));
-   });
-   var update = F2(function (action,model) {    var _p3 = action;return {ctor: "_Tuple2",_0: model,_1: $Effects.none};});
-   var Act = {ctor: "Act"};
-   var init = {ctor: "_Tuple2",_0: {ctor: "_Tuple0"},_1: $Effects.none};
-   return _elm.Component.CatalogSidebar.values = {_op: _op
-                                                 ,init: init
-                                                 ,Act: Act
-                                                 ,update: update
-                                                 ,view: view
-                                                 ,pkgBlock: pkgBlock
-                                                 ,pkgBlockItem: pkgBlockItem
-                                                 ,generalPackages: generalPackages
-                                                 ,renderingPackages: renderingPackages
-                                                 ,effectsPackages: effectsPackages};
-};
-Elm.Docs = Elm.Docs || {};
-Elm.Docs.Version = Elm.Docs.Version || {};
-Elm.Docs.Version.make = function (_elm) {
-   "use strict";
-   _elm.Docs = _elm.Docs || {};
-   _elm.Docs.Version = _elm.Docs.Version || {};
-   if (_elm.Docs.Version.values) return _elm.Docs.Version.values;
-   var _U = Elm.Native.Utils.make(_elm),
-   $Basics = Elm.Basics.make(_elm),
-   $Debug = Elm.Debug.make(_elm),
-   $Dict = Elm.Dict.make(_elm),
-   $Json$Decode = Elm.Json.Decode.make(_elm),
-   $List = Elm.List.make(_elm),
-   $Maybe = Elm.Maybe.make(_elm),
-   $Result = Elm.Result.make(_elm),
-   $Signal = Elm.Signal.make(_elm),
-   $String = Elm.String.make(_elm);
-   var _op = {};
-   var insert = F2(function (y,list) {
-      var _p0 = list;
-      if (_p0.ctor === "[]") {
-            return _U.list([y]);
-         } else {
-            var _p1 = _p0._0;
-            return _U.cmp(y,_p1) > 0 ? A2($List._op["::"],_p1,A2(insert,y,_p0._1)) : A2($List._op["::"],y,list);
-         }
-   });
-   var MinorPatch = F2(function (a,b) {    return {latest: a,others: b};});
-   var toDictHelp = F2(function (_p2,dict) {
-      var _p3 = _p2;
-      var current = {ctor: "_Tuple2",_0: _p3._1,_1: _p3._2};
-      var update = function (maybeMinorPatch) {
-         var _p4 = maybeMinorPatch;
-         if (_p4.ctor === "Nothing") {
-               return $Maybe.Just(A2(MinorPatch,current,_U.list([])));
-            } else {
-               var _p5 = _p4._0.latest;
-               return $Maybe.Just(A2(MinorPatch,A2($Basics.max,_p5,current),A2(insert,A2($Basics.min,_p5,current),_p4._0.others)));
-            }
-      };
-      return A3($Dict.update,_p3._0,update,dict);
-   });
-   var toDict = function (versions) {    return A3($List.foldl,toDictHelp,$Dict.empty,versions);};
-   var toLatest = F2(function (major,_p6) {
-      var _p7 = _p6;
-      var _p8 = _p7.latest;
-      var minor = _p8._0;
-      var patch = _p8._1;
-      return {ctor: "_Tuple3",_0: major,_1: minor,_2: patch};
-   });
-   var filterInteresting = function (versions) {    return A2($List.map,$Basics.uncurry(toLatest),$Dict.toList(toDict(versions)));};
-   var vsnToString = function (_p9) {
-      var _p10 = _p9;
-      return A2($Basics._op["++"],
-      $Basics.toString(_p10._0),
-      A2($Basics._op["++"],".",A2($Basics._op["++"],$Basics.toString(_p10._1),A2($Basics._op["++"],".",$Basics.toString(_p10._2)))));
-   };
-   var all = function (list) {
-      var _p11 = list;
-      if (_p11.ctor === "[]") {
-            return $Result.Ok(_U.list([]));
-         } else {
-            return A3($Result.map2,F2(function (x,y) {    return A2($List._op["::"],x,y);}),_p11._0,all(_p11._1));
-         }
-   };
-   var fromString = function (str) {
-      var _p12 = all(A2($List.map,$String.toInt,A2($String.split,".",str)));
-      if (_p12.ctor === "Ok" && _p12._0.ctor === "::" && _p12._0._1.ctor === "::" && _p12._0._1._1.ctor === "::" && _p12._0._1._1._1.ctor === "[]") {
-            return $Result.Ok({ctor: "_Tuple3",_0: _p12._0._0,_1: _p12._0._1._0,_2: _p12._0._1._1._0});
-         } else {
-            return $Result.Err(A2($Basics._op["++"],str," is not a valid Elm version"));
-         }
-   };
-   var fromStringList = function (versions) {    return all(A2($List.map,fromString,versions));};
-   var realMax = F2(function (rawVsn,allRawVsns) {
-      var _p13 = A3($Result.map2,F2(function (v0,v1) {    return {ctor: "_Tuple2",_0: v0,_1: v1};}),fromString(rawVsn),fromStringList(allRawVsns));
-      if (_p13.ctor === "Ok" && _p13._0.ctor === "_Tuple2") {
-            var _p14 = _p13._0._0;
-            var maxVersion = A3($List.foldl,$Basics.max,_p14,_p13._0._1);
-            return _U.eq(_p14,maxVersion) ? $Maybe.Nothing : $Maybe.Just(vsnToString(maxVersion));
-         } else {
-            return $Maybe.Nothing;
-         }
-   });
-   var decoder = A2($Json$Decode.customDecoder,$Json$Decode.string,fromString);
-   return _elm.Docs.Version.values = {_op: _op
-                                     ,decoder: decoder
-                                     ,filterInteresting: filterInteresting
-                                     ,realMax: realMax
-                                     ,toDict: toDict
-                                     ,fromStringList: fromStringList
-                                     ,vsnToString: vsnToString
-                                     ,MinorPatch: MinorPatch};
 };
 Elm.Route = Elm.Route || {};
 Elm.Route.make = function (_elm) {
@@ -13121,7 +13121,7 @@ Elm.Component.PackageDocs.make = function (_elm) {
    var toEntry = F2(function (moduleDocs,name) {
       var _p7 = A2($Dict.get,name,moduleDocs.entries);
       if (_p7.ctor === "Nothing") {
-            return _U.crashCase("Component.PackageDocs",{start: {line: 300,column: 3},end: {line: 305,column: 20}},_p7)(A2($Basics._op["++"],
+            return _U.crashCase("Component.PackageDocs",{start: {line: 304,column: 3},end: {line: 309,column: 20}},_p7)(A2($Basics._op["++"],
             "docs have been corrupted, could not find ",
             name));
          } else {
@@ -13149,11 +13149,12 @@ Elm.Component.PackageDocs.make = function (_elm) {
       if (_p11.ctor === "[]") {
             return _U.list([]);
          } else {
+            var _p17 = _p11._1;
             var _p16 = _p11._0;
             var part = $String.trim(_p16);
             var _p12 = isValue(part);
             if (_p12.ctor === "Just") {
-                  return A2($List._op["::"],A2(toEntry,moduleDocs,_p12._0),A2(subChunksHelp,moduleDocs,_p11._1));
+                  return A2($List._op["::"],A2(toEntry,moduleDocs,_p12._0),A2(subChunksHelp,moduleDocs,_p17));
                } else {
                   var trimmedPart = $String.trimLeft(_p16);
                   var _p13 = $String.words(trimmedPart);
@@ -13163,7 +13164,8 @@ Elm.Component.PackageDocs.make = function (_elm) {
                         var _p15 = _p13._0;
                         var _p14 = isValue(_p15);
                         if (_p14.ctor === "Just") {
-                              return _U.list([A2(toEntry,moduleDocs,_p14._0),Markdown(A2($String.dropLeft,$String.length(_p15),trimmedPart))]);
+                              return _U.list([A2(toEntry,moduleDocs,_p14._0)
+                                             ,Markdown(A2($String.dropLeft,$String.length(_p15),A2($String.join,",",A2($List._op["::"],trimmedPart,_p17))))]);
                            } else {
                               return _U.list([Markdown(A2($String.join,",",parts))]);
                            }
@@ -13173,13 +13175,13 @@ Elm.Component.PackageDocs.make = function (_elm) {
    });
    var subChunks = F2(function (moduleDocs,postDocs) {    return A2(subChunksHelp,moduleDocs,A2($String.split,",",postDocs));});
    var toChunks = function (moduleDocs) {
-      var _p17 = A2($String.split,"\n@docs ",moduleDocs.comment);
-      if (_p17.ctor === "[]") {
+      var _p18 = A2($String.split,"\n@docs ",moduleDocs.comment);
+      if (_p18.ctor === "[]") {
             return _U.crashCase("Component.PackageDocs",
             {start: {line: 225,column: 3},end: {line: 231,column: 54}},
-            _p17)("Expecting some documented functions in this module!");
+            _p18)("Expecting some documented functions in this module!");
          } else {
-            return A2($List._op["::"],Markdown(_p17._0),A2($List.concatMap,subChunks(moduleDocs),_p17._1));
+            return A2($List._op["::"],Markdown(_p18._0),A2($List.concatMap,subChunks(moduleDocs),_p18._1));
          }
    };
    var Info = F3(function (a,b,c) {    return {name: a,nameDict: b,chunks: c};});
@@ -13188,25 +13190,25 @@ Elm.Component.PackageDocs.make = function (_elm) {
    var Readme = function (a) {    return {ctor: "Readme",_0: a};};
    var Failed = function (a) {    return {ctor: "Failed",_0: a};};
    var update = F2(function (action,model) {
-      var _p19 = action;
-      switch (_p19.ctor)
+      var _p20 = action;
+      switch (_p20.ctor)
       {case "NoOp": return {ctor: "_Tuple2",_0: model,_1: $Effects.none};
-         case "Fail": return {ctor: "_Tuple2",_0: Failed(_p19._0),_1: $Effects.none};
-         case "LoadReadme": return {ctor: "_Tuple2",_0: Readme(_p19._0),_1: $Effects.none};
-         case "LoadDocs": var _p22 = _p19._0;
-           var _p21 = _p19._1;
-           var _p20 = A2($Dict.get,_p22,_p21);
-           if (_p20.ctor === "Just") {
-                 var chunks = toChunks(_p20._0);
-                 return {ctor: "_Tuple2",_0: RawDocs(A3(Info,_p22,toNameDict(_p21),chunks)),_1: delayedTypeParse(chunks)};
+         case "Fail": return {ctor: "_Tuple2",_0: Failed(_p20._0),_1: $Effects.none};
+         case "LoadReadme": return {ctor: "_Tuple2",_0: Readme(_p20._0),_1: $Effects.none};
+         case "LoadDocs": var _p23 = _p20._0;
+           var _p22 = _p20._1;
+           var _p21 = A2($Dict.get,_p23,_p22);
+           if (_p21.ctor === "Just") {
+                 var chunks = toChunks(_p21._0);
+                 return {ctor: "_Tuple2",_0: RawDocs(A3(Info,_p23,toNameDict(_p22),chunks)),_1: delayedTypeParse(chunks)};
               } else {
                  return {ctor: "_Tuple2"
-                        ,_0: Failed($Http.UnexpectedPayload(A2($Basics._op["++"],"Could not find module \'",A2($Basics._op["++"],_p22,"\'"))))
+                        ,_0: Failed($Http.UnexpectedPayload(A2($Basics._op["++"],"Could not find module \'",A2($Basics._op["++"],_p23,"\'"))))
                         ,_1: $Effects.none};
               }
-         default: var _p23 = model;
-           if (_p23.ctor === "RawDocs") {
-                 return {ctor: "_Tuple2",_0: ParsedDocs(_U.update(_p23._0,{chunks: _p19._0})),_1: jumpToHash};
+         default: var _p24 = model;
+           if (_p24.ctor === "RawDocs") {
+                 return {ctor: "_Tuple2",_0: ParsedDocs(_U.update(_p24._0,{chunks: _p20._0})),_1: jumpToHash};
               } else {
                  return {ctor: "_Tuple2",_0: Failed($Http.UnexpectedPayload("Something went wrong parsing types.")),_1: $Effects.none};
               }}
@@ -16131,8 +16133,8 @@ Elm.Component.Search.make = function (_elm) {
    var Load = function (a) {    return {ctor: "Load",_0: a};};
    var Fail = function (a) {    return {ctor: "Fail",_0: a};};
    var getPackageInfo = function () {
-      var getNew = A2($Http.get,$Json$Decode.list($Json$Decode.string),"https://crossorigin.me/http://package.elm-lang.org/new-packages");
-      var getAll = A2($Http.get,$Docs$Summary.decoder,"https://crossorigin.me/http://package.elm-lang.org/all-packages");
+      var getNew = A2($Http.get,$Json$Decode.list($Json$Decode.string),"http://klaftertief.github.io/elm-package-docs/new-packages.json");
+      var getAll = A2($Http.get,$Docs$Summary.decoder,"http://klaftertief.github.io/elm-package-docs/all-packages.json");
       return $Effects.task(A3($Basics.flip,
       $Task.onError,
       function (_p23) {

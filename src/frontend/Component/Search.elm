@@ -205,10 +205,10 @@ getPackageInfo : Effects Action
 getPackageInfo =
   let
     getAll =
-      Http.get Summary.decoder "https://crossorigin.me/http://package.elm-lang.org/all-packages"
+      Http.get Summary.decoder "http://klaftertief.github.io/elm-package-docs/all-packages.json"
 
     getNew =
-      Http.get (Json.list Json.string) "https://crossorigin.me/http://package.elm-lang.org/new-packages"
+      Http.get (Json.list Json.string) "http://klaftertief.github.io/elm-package-docs/new-packages.json"
   in
     Task.map2 (,) getAll getNew
       |> Task.map Load
